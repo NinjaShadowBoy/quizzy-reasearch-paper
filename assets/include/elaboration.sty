@@ -1,0 +1,307 @@
+\ProvidesPackage{assets/include/elaboration}
+
+%encoding
+%--------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%--------------------------------------
+
+% Language
+%--------------------------------------
+\usepackage[english]{babel}
+%--------------------------------------
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+%--------------------------------------
+\selectlanguage{english}
+
+\usepackage[pdftex]{color,graphicx}
+
+%\usepackage[hypertexnames=false, hidelinks]{hyperref}
+\usepackage{titleps}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{verbatim}
+% debug \usepackage{showframe}
+% \usepackage[bottom]{footmisc}
+\usepackage{geometry}
+\setlength{\marginparwidth}{2cm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{tabulary}
+\usepackage{caption}
+
+% Better listings: minted
+%\usepackage[newfloat]{minted}
+\usepackage{minted}
+\usepackage{xcolor}
+
+\setminted{
+    fontsize=\scriptsize,
+    tabsize=2,
+    breaklines,
+    linenos,
+    frame=single
+}
+
+\usemintedstyle{tango}
+%\renewcommand{\fps@listing}{htp}
+\newenvironment{code}{
+    \captionsetup{type=listing}
+    \setlength{\abovecaptionskip}{5pt}
+    \setlength{\belowcaptionskip}{20pt}
+}{}
+
+% Header / Footer Style
+\newpagestyle{main}[\small]{
+ \setheadrule{.55pt}%
+ \sethead{}% left
+ {}% center
+ {\thesection\ \sectiontitle}% right
+ \setfootrule{.55pt}%
+ \setfoot{}% left
+ {\thepage}% center
+ {}% right
+}
+
+% BibLaTeX Dinge
+% Numeric, bracketed citations (e.g., [10])
+\usepackage[style=numeric,sorting=none,backend=biber]{biblatex}
+\usepackage[babel,german=guillemets]{csquotes}
+\bibliography{assets/include/bibliographie.bib}
+
+% Abbildungs- und Tabellenverzeichniss
+\addto\captionsngerman{
+    \renewcommand{\listfigurename}{List of Figures}
+}
+
+\addto\captionsngerman{
+    \renewcommand{\listtablename}{List of Tables}
+}
+
+\addto\captionsngerman{
+    \renewcommand\listoflistingscaption{List of Source Code}
+}
+
+% Glossar
+\usepackage[toc,nopostdot]{glossaries}
+\usepackage{xparse}
+\DeclareDocumentCommand{\newdualentry}{O{} O{} m m m m } {%
+ \newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}}, description={#6},#1 }
+\newacronym[see={{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
+\makeglossaries%
+\makeindex
+\input{assets/include/glossar.tex}     % Glossar
+
+\linespread{1.3}
+
+\def\myauthor#1{\def\MyAuthor{#1}}
+\def\mycoauthors#1{\def\MyCoAuthors{#1}}
+\def\mymatrikel#1{\def\MyMatrikel{#1}}
+\def\mythema#1{\def\MyThema{#1}}
+\def\debug#1{\def\Debug{#1}}
+\def\mybetreuer#1{\def\MyBetreuer{#1}}
+\def\myprof#1{\def\MyProhemf{#1}}
+\def\mydate#1{\def\MyDate{#1}}
+
+\mybetreuer{}
+\debug{false}
+\mycoauthors{}
+
+%% Definieren der Arbeitsdaten Titel und Autor
+%%  #1: Autorenname
+%%  #2: Thema der Arbeit
+\newcommand{\mywork}[3]{%
+ \myauthor{#1}\mymatrikel{#2}\mythema{#3}%
+}
+
+% Optional co-authors block for the title page.
+% Usage:
+%   \mywork{Main Author}{ID}{Title}
+%   \mycoauthors{Co-author 1\\Co-author 2\\...\\Co-author 7}
+
+\newcommand{\mytitle}{%
+ \thispagestyle{empty}%
+ %    
+ \null\vfil%
+ \begin{center}%
+  \includegraphics[height=10cm]{assets/img/256px-Saint-Jean-Logo.png}%
+  \vskip 5cm%
+   {\large \textbf{Course: Research Methodology} \par}%
+  \vskip 1cm%
+   {\textbf{\Large \MyThema} \par}%
+  \vskip 1.5cm%
+    {\Large \MyAuthor \par}%
+    \ifthenelse{\equal{\MyCoAuthors}{}}{}{%
+     \vskip 0.5cm%
+     {\normalsize \MyCoAuthors \par}%
+    }%
+  \small{Student ID: \MyMatrikel} \\%
+  \small{\textit{\today{}}}%
+ \end{center}%
+ \vfil\null%
+}
+
+\newcommand{\erklaerung}{%
+ \thispagestyle{empty}
+ \vspace*{\stretch{1}}
+ \begin{center}
+  \fbox{
+   \begin{minipage}{0.95\textwidth}
+I declare that I have written this document independently and without the unauthorized assistance of third parties. I have only used the sources and tools specified, and I have marked as such the sections that were taken literally or paraphrased from these sources. This declaration of independent work also applies to any included drawings, sketches, or graphical representations. This work has not been submitted in the same or similar form to any other examination authority, nor has it been published. By submitting the electronic version of the final thesis, I acknowledge that it may be checked for plagiarism using a plagiarism detection service and will be stored exclusively for examination purposes.
+    \vskip 1cm
+    \begin{tabular}{ll}
+    \noindent Hagen, \MyDate \hspace{1cm} {} & \rule{70mm}{.1pt} \\
+     {}                                           & \MyAuthor
+    \end{tabular}
+   \end{minipage}
+  }
+ \end{center}
+}
+
+\newcounter{beispielnummer}
+\setcounter{beispielnummer}{0}
+
+\newcounter{tempctr}
+\setcounter{tempctr}{0}
+
+\newcommand{\emptyspaces}[1]{%
+ \setcounter{tempctr}{0}%
+ \whiledo{\not \value{tempctr} > #1}{%
+  \phantom{x}%
+  \stepcounter{tempctr}%
+ }%
+}
+
+\definecolor{beispielfarbe}{rgb}{1.0,1.0,0.888}
+
+\newfloat{fbeispiel}{tbhp}{bsp}
+\floatname{fbeispiel}{Example}
+
+%% Fügt ein Beispiel ein
+%%   #1: Text des Beispiels
+%%   #2: Unterschrift
+%%   #3: Label
+\newcommand{\beispiel}[3]{%
+ \stepcounter{beispielnummer}%
+ \begin{fbeispiel}
+  \begin{center}\colorbox{beispielfarbe}{%
+    \parbox{0.9\textwidth}{%
+     #1%
+    }}%\\\vskip 0.2cm%
+   %%Bsp. \arabic{beispielnummer}: #2%
+  \end{center}%
+  \caption{#2}
+  \label{#3}
+ \end{fbeispiel}
+}
+
+%% Fügt ein Beispiel ein
+%%   #1: Text des Beispiels
+%%   #2: Unterschrift
+%%   #3: Label
+\newcommand{\pbeispiel}[4]{%
+ \stepcounter{beispielnummer}%
+ \begin{fbeispiel}[#4]
+  \begin{center}\colorbox{beispielfarbe}{%
+    \parbox{0.9\textwidth}{%
+     #1%
+    }}%\\\vskip 0.2cm%
+   %%Bsp. \arabic{beispielnummer}: #2%
+  \end{center}%
+  \caption{#2}
+  \label{#3}
+ \end{fbeispiel}
+}
+
+\newcommand{\nfbeispiel}[1]{%
+ \begin{center}\colorbox{beispielfarbe}{%
+   \parbox{0.9\textwidth}{%
+    #1%
+   }}%
+ \end{center}%
+}
+
+\newcommand{\ueberschrift}[1]{\vskip 0.25cm \noindent \textbf{#1} \vskip 0.25cm}
+\newcommand{\sourcecode}[1]{\textsf{\textbf{#1}}}
+\newcommand{\linesource}[1]{
+ \begin{quote}
+  \textsf{\textbf{#1}}
+ \end{quote}
+}
+
+\renewcommand{\sectionmark}[1]%
+{\markright{Chapter \thesection: #1}}
+
+\newcommand{\frontmatter}{
+ \thispagestyle{empty}
+ \pagenumbering{roman}
+}
+
+\newcommand{\mainmatter}{
+ \pagestyle{main}
+ \pagenumbering{arabic}
+}
+
+\newcommand{\subsubsubsection}[1]{%
+ \vskip 0.25cm%
+ \noindent\textbf{#1}
+ %
+ %
+}
+
+\newcommand{\mybibliography}{%
+ \newpage%
+ \fancyhf{}%
+ \lhead{\bibname}%
+ \cfoot{\thepage}%
+ %%\clearpage
+ \addcontentsline{toc}{section}{\bibname}%
+}
+
+\newcommand{\isdebug}{%
+ \debug{true}%
+}
+
+\newcommand{\ifdebug}[1]{
+ \ifthenelse{\equal{\Debug}{true}}{#1}{}%
+}
+
+\newenvironment{brainstorm}%
+{\mbox{}\small\sffamily\color{blue}}%
+{\normalsize\rmfamily\color{black}}
+
+\newcommand{\randnotiz}[1]{%
+ \ifdebug{\linespread{1.0}\mbox{}\marginpar{\sffamily\color{red}\tiny #1 \color{black}\rmfamily}\linespread{1.3}}%
+}
+
+\newcommand{\abbildung}[3]{%
+ \begin{figure}[htbp]%
+  \begin{center}%
+   \includegraphics[#2]{#1}%
+   \label{fig:#1}%
+   \caption{#3}%
+  \end{center}%
+ \end{figure}%
+}
+
+\newcommand{\klasse}[1]{%
+ \emph{#1}%
+}
+
+
+\newcommand{\methode}[1]{%
+ \texttt{#1}%
+}
+
+%% Einstellen der Seitenränder
+\oddsidemargin 1cm
+\evensidemargin 1cm
+\textwidth 15cm
+\topmargin -1.25cm
+\textheight 24.37cm
+

@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.6}%
+\contentsline {section}{\numberline {2}State of the Art in Science and Technology}{2}{section.7}%
+\contentsline {subsection}{\numberline {2.1}AI Chatbots and Conversational Agents in Higher Education}{3}{subsection.8}%
+\contentsline {subsection}{\numberline {2.2}Large Language Models for Natural Language Understanding}{3}{subsection.9}%
+\contentsline {subsection}{\numberline {2.3}Retrieval-Augmented Generation for Institutional Knowledge Access}{4}{subsection.10}%
+\contentsline {subsection}{\numberline {2.4}Integration of AI Chatbots with Learning and Assessment Platforms}{4}{subsection.11}%
+\contentsline {subsection}{\numberline {2.5}Comparable University AI Assistant Systems}{5}{subsection.12}%
+\contentsline {subsection}{\numberline {2.6}Evaluation Frameworks for AI-Based Educational Systems}{5}{subsection.13}%
+\contentsline {subsection}{\numberline {2.7}Summary and Research Gap}{6}{subsection.14}%
+\contentsline {section}{\numberline {3}Design and Modeling}{6}{section.15}%
+\contentsline {subsection}{\numberline {3.1}The Existing System and the Design Context}{6}{subsection.16}%
+\contentsline {subsection}{\numberline {3.2}Use Case Model}{6}{subsection.17}%
+\contentsline {subsection}{\numberline {3.3}System Architecture}{7}{subsection.20}%
+\contentsline {subsection}{\numberline {3.4}MVC Architecture and Processing Pipeline}{7}{subsection.22}%
+\contentsline {subsection}{\numberline {3.5}Information Model}{9}{subsection.24}%
+\contentsline {subsection}{\numberline {3.6}Technology Choices and Design Rationale}{9}{subsection.26}%
+\contentsline {section}{\numberline {4}Implementation}{11}{section.27}%
+\contentsline {subsection}{\numberline {4.1}Backend Services and API Layer}{11}{subsection.28}%
+\contentsline {subsection}{\numberline {4.2}Mobile Application: Offline-First Design}{12}{subsection.32}%
+\contentsline {subsection}{\numberline {4.3}Web Application: Teacher and Academic Administrator Dashboard}{14}{subsection.34}%
+\contentsline {subsection}{\numberline {4.4}Retrieval-Augmented Generation Pipeline}{15}{subsection.36}%
+\contentsline {subsection}{\numberline {4.5}Chat Interface Design and RAG Integration}{16}{subsection.38}%
+\contentsline {subsection}{\numberline {4.6}Cloud Deployment and Infrastructure}{16}{subsection.39}%
+\contentsline {subsection}{\numberline {4.7}Bilingual Support: Chat Interface}{17}{subsection.40}%
+\contentsline {subsection}{\numberline {4.8}Addressing Remaining Challenges Through Implementation}{17}{subsection.41}%
+\contentsline {subsection}{\numberline {4.9}Summary}{17}{subsection.42}%
+\contentsline {section}{\numberline {5}Evaluation}{17}{section.43}%
+\contentsline {section}{\numberline {6}Summary and Outlook}{17}{section.44}%
+\contentsline {section}{References}{18}{section*.45}%
